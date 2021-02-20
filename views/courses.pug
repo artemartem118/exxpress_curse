@@ -1,0 +1,23 @@
+extends layout/main
+block title
+  title Курсы
+block content
+  h1 courses
+  if courses.length
+    for courseItem in courses
+      .row
+        .col.s6.offset-s3
+          .card
+            .card-image
+              img(src=`${courseItem.imgUrl}`, title=`${courseItem.title}`)
+            .card-content
+              span.card-title #{courseItem.title}
+              p.price #{courseItem.price}
+            .card-action.actions
+              a(href=`/courses/${courseItem.id}`, target='__blank') Открыть курс
+              a(href=`/courses/${courseItem.id}/edit/?allow=foo`) Редактировать
+              form(action='/card/add', method='POST')
+                input(type='hidden', name='id', value=`${courseItem.id}`)
+                button.btn.btn-primary Добавить в корзину
+  else
+    p Курсов пока нет

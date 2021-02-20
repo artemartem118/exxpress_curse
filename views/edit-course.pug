@@ -1,0 +1,25 @@
+extends layout/main
+block title
+	title Редактировать курс #{courseItem.title}
+block content
+	h1 Редактировать курс #{courseItem.title}
+	form.course-form(action='/courses/edit', method='POST')
+		.input-field.col
+			input#title.validate(type='text', name='title', required, value=`${courseItem.title}`)
+			label(for='title') Название курса
+			span.helper-text(data-error='Введите название курса')
+
+		.input-field.col
+			input#price.validate(type='text', name='price', required, min=1, value=`${courseItem.price}`)
+			label(for='price') Цена курса
+			span.helper-text(data-error='Введите цену')
+
+		.input-field.col
+			input#imgUrl.validate(type='text', name='imgUrl', required, value=`${courseItem.imgUrl}`)
+			label(for='imgUrl') Url картинки
+			span.helper-text(data-error='Введите url картинки')
+		input(type='hidden', name='id', value=`${courseItem.id}`)
+		button.btn.btn-primary Сохранить
+	form(action='/courses/remove/', method='POST')
+		input(type='hidden', name='id', value=`${courseItem.id}`)
+		button.btn.red Удалить курс

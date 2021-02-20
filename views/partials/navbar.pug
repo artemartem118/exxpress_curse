@@ -1,0 +1,31 @@
+nav
+  .nav-wrapper
+    a(href='/', class='brand-logo') Приложение курсов
+    ul#nav-mobile.right.hide-on-med-and-down
+      if isHome
+        li.active
+          a(href='/') Главная
+      else
+        li
+          a(href='/') Главная
+
+      if isCourses
+        li.active
+          a(href='/courses') Курсы
+      else
+        li
+          a(href='/courses') Курсы
+
+      if isAddCourse
+        li.active
+          a(href='/add-course') Добавить курс
+      else
+        li
+          a(href='/add-course') Добавить курс
+
+      if isCard
+        li.active
+          a(href='/card') Корзина
+      else
+        li
+          a(href='/card') Корзина

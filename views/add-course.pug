@@ -1,0 +1,21 @@
+extends layout/main
+block title
+	title Добавить курс
+block content
+	h1 Добавить новый курс
+	form(action='/add-course', method='POST')
+		.input-field.col
+			input#title.validate(type='text', name='title', required)
+			label(for='title') Название курса
+			span.helper-text(data-error='Введите название курса')
+
+		.input-field.col
+			input#price.validate(type='text', name='price', required, min=1)
+			label(for='price') Цена курса
+			span.helper-text(data-error='Введите цену')
+
+		.input-field.col
+			input#imgUrl.validate(type='text', name='imgUrl', required)
+			label(for='imgUrl') Url картинки
+			span.helper-text(data-error='Введите url картинки')
+		button.btn.btn-primary Добавить курс

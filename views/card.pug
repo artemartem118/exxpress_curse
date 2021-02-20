@@ -1,0 +1,25 @@
+extends layout/main
+block title
+  title Корзина
+block content
+  h1 Корзина
+  #card
+    if courses.length
+      table
+        thead
+          tr
+            th Название
+            th Количество
+            th Действия
+        tbody
+          for courseItem in courses
+            tr
+              td #{courseItem.title}
+              td #{courseItem.count}
+              td
+                button.btn.btn-small.js-remove(data-id=`${courseItem.id}`) Удалить
+      p
+        strong Цена:
+        span.price #{price}
+    else
+      p Корзина пуста
