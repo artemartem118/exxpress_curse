@@ -19,7 +19,11 @@ block content
 			label(for='imgUrl') Url картинки
 			span.helper-text(data-error='Введите url картинки')
 		input(type='hidden', name='id', value=`${courseItem.id}`)
+		input(type='hidden', name='_csrf', value=`${csrf}`)
+
 		button.btn.btn-primary Сохранить
 	form(action='/courses/remove/', method='POST')
+		input(type='hidden', name='_csrf', value=`${csrf}`)
+
 		input(type='hidden', name='id', value=`${courseItem.id}`)
 		button.btn.red Удалить курс

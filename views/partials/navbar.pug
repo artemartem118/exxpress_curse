@@ -16,16 +16,34 @@ nav
         li
           a(href='/courses') Курсы
 
-      if isAddCourse
-        li.active
-          a(href='/add-course') Добавить курс
-      else
-        li
-          a(href='/add-course') Добавить курс
+      if isAuth
+        if isAddCourse
+          li.active
+            a(href='/add-course') Добавить курс
+        else
+          li
+            a(href='/add-course') Добавить курс
 
-      if isCard
-        li.active
-          a(href='/card') Корзина
-      else
+        if isCard
+          li.active
+            a(href='/card') Корзина
+        else
+          li
+            a(href='/card') Корзина
+
+        if isOrder
+          li.active
+            a(href='/orders') Заказы
+        else
+          li
+            a(href='/orders') Заказы
+
         li
-          a(href='/card') Корзина
+          a(href='/auth/logout') Выйти
+      else
+        if isLogin
+          li.active
+            a(href='/auth/login#login') Войти
+        else
+          li
+            a(href='/auth/login#login') Войти

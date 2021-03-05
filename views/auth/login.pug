@@ -1,0 +1,61 @@
+extends ../layout/main
+block title
+  title Авторизация
+block content
+  .auth
+    .row
+      .col.s12
+        ul.tabs
+          li.tab.col.s6
+            a.active(href='#login') Войти
+          li.tab.col.s6
+            a(href='#register') Регистрация
+      #login.col.s6.offset-s3
+        h1 Войти в магазин
+        if loginError.length
+          p.alert=loginError
+
+        form(action='/auth/login', method='POST')
+          .input-field
+            input#email.validate(type='email', name='email', required)
+            label(for='email') Email
+            span.helper-text(data-error='Введите email')
+
+          .input-field
+            input#password.validate(type='password', name='password', required)
+            label(for='password') Пароль
+            span.helper-text(data-error='Введите Пароль')
+
+          input(type='hidden', name='_csrf', value=`${csrf}`)
+
+          button.btn.btn-primary(type='submit') Войти
+      #register.col.s6.offset-s3
+        h1 Создать аккаунт
+        if registerError.length
+          p.alert=registerError
+
+        form(action='/auth/register', method='POST' novalidate)
+          .input-field
+            input#remail.validate(type='email', name='email', required)
+            label(for='remail') Email
+            span.helper-text(data-error='Введите email')
+
+          .input-field
+            input#name.validate(type='text', name='name', required)
+            label(for='name') Имя
+            span.helper-text(data-error='Введите имя')
+
+          .input-field
+            input#rpassword.validate(type='password', name='password', required)
+            label(for='rpassword') Пароль
+            span.helper-text(data-error='Введите Пароль')
+
+          .input-field
+            input#confirm.validate(type='password', name='confirm', required)
+            label(for='confirm') Пароль ещё раз
+            span.helper-text(data-error='Введите Пароль')
+
+          input(type='hidden', name='_csrf', value=`${csrf}`)
+
+          button.btn.btn-primary(type='submit') Зарегестрироваться
+

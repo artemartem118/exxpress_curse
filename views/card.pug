@@ -17,9 +17,13 @@ block content
               td #{courseItem.title}
               td #{courseItem.count}
               td
-                button.btn.btn-small.js-remove(data-id=`${courseItem.id}`) Удалить
+                button.btn.btn-small.js-remove(data-id=`${courseItem.id}`, data-csrf=`${csrf}`) Удалить
       p
         strong Цена:
         span.price #{price}
+      form.course-form(action='/orders', method='POST')
+        input(type='hidden', name='_csrf', value=`${csrf}`)
+
+        button.btn Сделать заказ
     else
       p Корзина пуста

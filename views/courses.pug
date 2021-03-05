@@ -15,9 +15,12 @@ block content
               p.price #{courseItem.price}
             .card-action.actions
               a(href=`/courses/${courseItem.id}`, target='__blank') Открыть курс
-              a(href=`/courses/${courseItem.id}/edit/?allow=foo`) Редактировать
-              form(action='/card/add', method='POST')
-                input(type='hidden', name='id', value=`${courseItem.id}`)
-                button.btn.btn-primary Добавить в корзину
+              if isAuth
+                a(href=`/courses/${courseItem.id}/edit/?allow=foo`) Редактировать
+                form(action='/card/add', method='POST')
+                  input(type='hidden', name='_csrf', value=`${csrf}`)
+
+                  input(type='hidden', name='id', value=`${courseItem.id}`)
+                  button.btn.btn-primary Добавить в корзину
   else
     p Курсов пока нет

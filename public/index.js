@@ -5,8 +5,21 @@ const toCurrency = (number) => {
   }).format(number)
 }
 
+const toDate = date => new Intl.DateTimeFormat('ru-RU', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit'
+}).format(new Date(date))
+
 document.querySelectorAll('.price').forEach(node => {
   node.textContent = toCurrency(node.textContent)
+})
+
+document.querySelectorAll('.date').forEach(node => {
+  node.textContent = toDate(node.textContent)
 })
 
 
@@ -15,9 +28,12 @@ if (cardElement) {
   cardElement.addEventListener('click', (e) => {
     const { target } = e
     if (target.classList.contains('js-remove')) {
-      const { id } = target.dataset
+      const { id, csrf } = target.dataset
       fetch(`/card/remove/${id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'X-XSRF-TOKEN': csrf
+        }
       }).then(res => res.json())
         .then(card => {
           if (card.courses.length) {
@@ -27,7 +43,7 @@ if (cardElement) {
                   <td>${c.title}</td>
                   <td>${c.count}</td>
                   <td>
-                    <button class="btn btn-small js-remove" data-id="${c.id}">Удалить</button>
+                    <button class="btn btn-small js-remove" data-id="${c._id}">Удалить</button>
                   </td>
                 </tr>
              `
@@ -42,3 +58,6 @@ if (cardElement) {
     }
   })
 }
+
+
+M.Tabs.init(document.querySelectorAll('.tabs'))

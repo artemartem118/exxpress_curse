@@ -1,0 +1,26 @@
+extends layout/main
+block title
+  title Заказы
+block content
+  h1 Мои заказы
+  if orders.length
+    for order in orders
+      .row
+        .col.s6.offset-s3
+          .card
+            .card-content
+              span.cart-title Заказ
+                small=order._id
+              p.date=order.date
+              p
+                em=order.user.userId.name
+                |  !{order.user.userId.email}
+              ol
+                for course in order.courses
+                  li !{course.course.title} (x #[strong !{course.count}])
+              hr
+              p Цена
+                span.price=order.price
+
+  else
+    p Заказов пока нет

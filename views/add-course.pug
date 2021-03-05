@@ -18,4 +18,7 @@ block content
 			input#imgUrl.validate(type='text', name='imgUrl', required)
 			label(for='imgUrl') Url картинки
 			span.helper-text(data-error='Введите url картинки')
+
+		input(type='hidden', name='_csrf', value=`${csrf}`)
+
 		button.btn.btn-primary Добавить курс

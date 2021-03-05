@@ -19,6 +19,9 @@ const user = new Schema({
   },
   name: {
     type: String,
+  },
+  password: {
+    type: String,
     required: true
   },
   cart: {
@@ -27,8 +30,6 @@ const user = new Schema({
 })
 
 user.methods.addToCart = function (course) {
-  console.log('this.log', this)
-
   const items = [...this.cart.items]
   const idx = items.findIndex(c => c.courseId.toString() === course.id.toString())
 
@@ -42,6 +43,23 @@ user.methods.addToCart = function (course) {
   }
 
   this.cart = { items }
+  return this.save()
+}
+
+user.methods.removeFromCart = function (id) {
+  let items = [...this.cart.items]
+  const idx = items.findIndex(c => c.courseId.toString() === id.toString())
+  if (items[idx].count === 1) {
+    items = items.filter(c => c.courseId.toString() !== id.toString())
+  } else {
+    items[idx].count--
+  }
+  this.cart = { items }
+  return this.save()
+}
+
+user.methods.clearCart = function (id) {
+  this.cart = { items: [] }
   return this.save()
 }
 
